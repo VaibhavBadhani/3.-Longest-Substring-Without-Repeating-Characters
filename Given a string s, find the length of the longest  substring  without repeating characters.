@@ -1,0 +1,37 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+    // Creating a set to store the last positions of occurrence
+    HashMap<Character, Integer> seen = new HashMap<>();  
+    int maxlen = 0;
+    int start = 0;
+    for(int end = 0; end < s.length(); end++)
+    {
+      // Checking if we have already seen the element or not
+      if(seen.containsKey(s.charAt(end)))
+      { // If we have seen the number, move the start pointer
+        // to position after the last occurrence
+        start = Math.max(start, seen.get(s.charAt(end)) + 1);
+      }
+      // Updating the last seen value of the character
+      seen.put(s.charAt(end), end);
+      maxlen = Math.max(maxlen, end-start + 1);
+    }
+    return maxlen;
+    }
+}
+//***********better solution*********** */
+/*class Solution {
+    //public int lengthOfLongestSubstring(String s) {
+    // final int n = s.length();
+   // int len = 0;
+   // int [] repeat = new int[128];
+    for (int c = 0, j = 0, i = 0; j < n; j++) {
+        c = s.charAt(j);
+        i = Math.max(repeat[c], i);
+        len = Math.max(len, j - i +1);
+        repeat[c] = j+1;
+    }
+    return len;
+        }       
+        
+}*/
